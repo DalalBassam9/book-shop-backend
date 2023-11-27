@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    protected $primaryKey = 'userId';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +24,7 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
+        'phone'
     ];
 
     /**
@@ -54,7 +55,7 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Cart::class, 'userId');
 	}
-
+ 
 	public function addresses(): HasMany
 	{
 		return $this->hasMany(Address::class, 'userId');

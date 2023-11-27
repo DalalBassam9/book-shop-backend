@@ -26,7 +26,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('public');
+            $image = $request->file('image')->store("images",'public');
+
+    
         }
         $product =  Product::create([
             'name' => $request->name,
@@ -51,16 +53,16 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, string $id)
+    public function update(Request $request, $producId)
     {
-
-        $product  = Product::findOrFail($id);
+        $product  = Product::findOrFail($producId);
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('product-images', 'public');
+            $image = $request->file('image')->store("images", 'public');
         } else {
             $image = $product->image;
         } 
+
         $product->update([
             'name' => $request->name,
             'categoryId' => $request->categoryId,
@@ -69,7 +71,9 @@ class ProductController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
         ]);
-        return new ProductResource($product);
+
+        return response()->json($product, 204);
+
     }
 
     /**
