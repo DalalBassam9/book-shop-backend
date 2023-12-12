@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Website;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
@@ -16,9 +16,15 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            $this->merge(Arr::except(parent::toArray($request), [
-                'created_at', 'updated_at', 'email', 'email_verified_at'
-            ]))
+            'userId' => $this->userId,
+            'firstName'  => $this->firstName,
+            'lastName'  => $this->lastName,
+            'phone'     => $this->phone,
+            'email'     => $this->email,
+            'image' => asset('storage/' . $this->image),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        
         ];
     }
 }

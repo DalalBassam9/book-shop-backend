@@ -17,7 +17,6 @@ class CityController extends Controller
     {
         $cities = City::orderBy('created_at', 'desc')->paginate(10);
         return  CityResource::collection($cities);
-        
     }
 
     /**
@@ -47,7 +46,6 @@ class CityController extends Controller
         $city = City::findOrFail($cityId);
         $city->update(['name' => $request->name]);
         return new CityResource($city);
-       
     }
 
     /**
@@ -58,5 +56,14 @@ class CityController extends Controller
         $city = City::findOrFail($cityId);
         $city->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function getCitiesLookups()
+    {
+        $cities = City::select('cityId', 'name')->get();
+        return response()->json(['cities' => $cities]);
     }
 }

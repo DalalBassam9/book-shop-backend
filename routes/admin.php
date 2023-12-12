@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::apiResource('cities', \App\Http\Controllers\Admin\CityController::class);
 Route::apiResource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+Route::get('/cities-lookups', [\App\Http\Controllers\Admin\CityController::class, 'getCitiesLookups']);
 Route::get('/categories-lookups', [\App\Http\Controllers\Admin\CategoryController::class, 'getCategoriesLookups']);
 Route::apiResource('products', \App\Http\Controllers\Admin\ProductController::class);
 Route::put('products/{productId}/update', [\App\Http\Controllers\Admin\ProductController::class,"update"]);

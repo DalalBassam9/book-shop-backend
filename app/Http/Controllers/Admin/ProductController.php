@@ -72,7 +72,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
         ]);
 
-        return response()->json($product, 204);
+        return new ProductResource($product);
 
     }
 
