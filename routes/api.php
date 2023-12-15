@@ -31,5 +31,10 @@ Route::put('/cart', [\App\Http\Controllers\CartController::class, 'updateCart'])
 Route::delete('/cart/{cartId}', [\App\Http\Controllers\CartController::class, 'deleteCart'])->middleware(['auth:sanctum']);
 
 
+Route::get('/my/wishlist', [\App\Http\Controllers\WishlistController::class, 'getUserWishlist'])->middleware('auth:sanctum');
+Route::post('/my/wishlist-add/{productId}', [\App\Http\Controllers\WishlistController::class, 'addToWishlist'])->middleware('auth:sanctum');
+Route::delete('/my/wishlist/{productId}', [\App\Http\Controllers\WishlistController::class, 'removeFromWishlist'])->middleware('auth:sanctum');
+
+
 Route::middleware('auth')->apiResource('/my/addresses', \App\Http\Controllers\AddressController::class);
 Route::middleware('auth')->put('/my/addresses/set-default-address/{address}', [\App\Http\Controllers\AddressController::class, 'setDefaultAddress']);

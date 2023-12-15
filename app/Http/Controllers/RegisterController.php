@@ -20,7 +20,8 @@ class RegisterController extends Controller
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phone' => 'required'
+            'phone' => 'required',
+            'image'
         ]);
 
         $user = User::create([
@@ -28,6 +29,7 @@ class RegisterController extends Controller
             'lastName' => request('lastName'),
             'phone' => request('phone'),
             'email' => request('email'),
+            'image'=>null,
             'password' => Hash::make(request('password')),
         ]);
 
